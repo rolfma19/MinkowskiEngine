@@ -305,7 +305,7 @@ class MinkowskiConvolutionBase(MinkowskiModuleBase):
             # If the kernel_size == 1, the convolution is simply a matrix
             # multiplication
             out_coordinate_map_key = input.coordinate_map_key
-            outfeat = input.F.mm(self.kernel)
+            outfeat = torch.mm(input.F.clone(), self.kernel.clone())
         else:
             # Get a new coordinate_map_key or extract one from the coords
             out_coordinate_map_key = _get_coordinate_map_key(
